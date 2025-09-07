@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab Rules Course</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f9f9f9;
+        color: #333;
+      }
+      header {
+        background: #004080;
+        color: #fff;
+        padding: 1rem;
+        text-align: center;
+        position: sticky;
+        top: 0;
+      }
+      .progress-container {
+        width: 80%;
+        margin: auto;
+        background: #ccc;
+        border-radius: 8px;
+        height: 16px;
+        margin-top: 0.5rem;
+      }
+      .progress-bar {
+        height: 16px;
+        width: 0;
+        background: #00cc66;
+        border-radius: 8px;
+        transition: width 0.3s;
+      }
+      main,
+      footer {
+        max-width: 900px;
+        margin: auto;
+        padding: 2rem;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+        transition: transform 0.2s;
+      }
+      .card:hover {
+        transform: scale(1.03);
+      }
+      .icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+      }
+      .quiz-link {
+        display: block;
+        margin-top: 2rem;
+        padding: 1rem;
+        text-align: center;
+        border-radius: 12px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .quiz-link.disabled {
+        background: #ccc;
+        color: #666;
+        pointer-events: none;
+      }
+      .quiz-link.enabled {
+        background: #00cc66;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Comportamentul în laboratorul de informatică</h1>
+      <div class="progress-container">
+        <div id="progress" class="progress-bar"></div>
+      </div>
+    </header>
+
+    <main>
+      <p>Fă click pe fiecare card pentru a explora conținuturile.</p>
+      <div class="grid">
+        <a href="rule1.html" class="card" data-id="rule1">
+          <img src="./images/classroom.png" alt="classroom" class="icon" />
+          În laborator
+        </a>
+        <a href="rule2.html" class="card" data-id="rule2">
+          <img src="./images/computer.png" alt="computer" class="icon" />
+          Dispozitive hardware
+        </a>
+        <a href="rule3.html" class="card" data-id="rule3">
+          <img src="./images/internet.png" alt="software" class="icon" />
+          Aplicații & Internet
+        </a>
+        <a href="rule4.html" class="card" data-id="rule4">
+          <img src="./images/kind.png" alt="kind" class="icon" />
+          Fii respectuos!
+        </a>
+      </div>
+
+      <a id="quizLink" class="quiz-link disabled" href="quiz.html"
+        >Go to Quiz</a
+      >
+    </main>
+    <footer>
+      <p>Icons by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+    </footer>
+
+    <script>
+      const totalItems = 4 + 4 + 4 + 4 + 4; // 4 main rules + 4 subcards each
+
+      if (!localStorage.getItem('completed')) {
+        localStorage.setItem('completed', JSON.stringify([]));
+      }
+      const completed = JSON.parse(localStorage.getItem('completed'));
+      const progressBar = document.getElementById('progress');
+
+      const quizLink = document.getElementById('quizLink');
+
+      function updateProgress() {
+        const percent = Math.min((completed.length / totalItems) * 100, 100);
+        progressBar.style.width = percent + '%';
+
+        if (completed.length >= totalItems) {
+          quizLink.classList.remove('disabled');
+          quizLink.classList.add('enabled');
+        }
+      }
+      updateProgress();
+
+      // Mark main rule cards as visited
+      document.querySelectorAll('.card').forEach((card) => {
+        card.addEventListener('click', () => {
+          const id = card.getAttribute('data-id');
+          if (id && !completed.includes(id)) {
+            completed.push(id);
+            localStorage.setItem('completed', JSON.stringify(completed));
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

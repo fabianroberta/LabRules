@@ -221,10 +221,10 @@
         const percent = (score / Object.keys(answers).length) * 100;
 
         if (percent >= 90) {
-          resultDiv.innerHTML = `<h2 style="color:green">🎉 You are now ready!</h2><p>Your score: ${percent}%</p>`;
+          resultDiv.innerHTML = `<h2 style="color:green">🎉 Felicitări, ai terminat!</h2><p>Your score: ${percent}%</p>`;
           localStorage.setItem('completed', JSON.stringify([]));
         } else {
-          resultDiv.innerHTML = `<h2 style="color:red">❌ You have to take the quiz again</h2><p>Your score: ${percent}%</p><button id="retryBtn">Try Again</button>`;
+          resultDiv.innerHTML = `<h2 style="color:red">❌ Trebuie să dai testul din nou</h2><p>Punctajul tău: ${percent}%</p><button id="retryBtn">Try Again</button>`;
           document.getElementById('retryBtn').addEventListener('click', () => {
             quizForm.reset();
             resultDiv.innerHTML = '';

@@ -181,6 +181,22 @@
             lui.</label
           >
         </div>
+        <div class="question">
+          <p>7. Atunci când intri în laboratorul de informatică:</p>
+          <label
+            ><input type="radio" name="q7" value="a" /> Alergi ca să ajungi
+            primul la calculator.</label
+          ><br />
+          <label
+            ><input type="radio" name="q7" value="b" /> Te așezi la calculator
+            și începi să te joci sau să cauți diverse lucruri online.</label
+          ><br />
+          <label
+            ><input type="radio" name="q7" value="c" /> Te așezi la calculator,
+            îți pregătești caietul și penarul și aștepți în liniște
+            instrucțiunile profesorului.</label
+          >
+        </div>
         <button type="submit">Submit</button>
       </form>
 
@@ -188,7 +204,7 @@
     </main>
 
     <script>
-      const totalItems = 3 + 3 + 3 + 3;
+      const totalItems = 4 + 4 + 4 + 4 + 4;
       if (!localStorage.getItem('completed')) {
         localStorage.setItem('completed', JSON.stringify([]));
       }
@@ -213,6 +229,7 @@
           q4: 'a',
           q5: 'c',
           q6: 'a',
+          q7: 'c',
         };
         Object.keys(answers).forEach((q) => {
           const selected = quizForm.querySelector(`input[name=${q}]:checked`);
